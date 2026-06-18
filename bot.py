@@ -189,12 +189,14 @@ async def admin_clean(callback: CallbackQuery):
 
     @dp.message()
     async def get_link(message: Message):
-        print("GET_LINK ISHLADI:", message.text)
+        print("GET_LINK ISHLADI:", message.text, flush=True)
+        await message.answer("🔎 Link qabul qilindi")
+
         if message.from_user.id in waiting_broadcast:
             if message.text == "/cancel":
                 waiting_broadcast.discard(message.from_user.id)
-            await message.answer("❌ Broadcast bekor qilindi.")
-            return
+                await message.answer("❌ Broadcast bekor qilindi.")
+                return
 
             stats_data = load_stats()
             users = stats_data.get("users", [])
