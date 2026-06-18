@@ -189,6 +189,7 @@ async def admin_clean(callback: CallbackQuery):
 
     @dp.message()
     async def get_link(message: Message):
+        print("GET_LINK ISHLADI:", message.text)
         if message.from_user.id in waiting_broadcast:
             if message.text == "/cancel":
                 waiting_broadcast.discard(message.from_user.id)
