@@ -195,33 +195,33 @@ async def admin_clean(callback: CallbackQuery):
             await message.answer("❌ Broadcast bekor qilindi.")
             return
 
-        stats_data = load_stats()
-        users = stats_data.get("users", [])
+            stats_data = load_stats()
+            users = stats_data.get("users", [])
 
-        sent = 0
-        failed = 0
+            sent = 0
+            failed = 0
 
-        status = await message.answer(
-            f"⏳ Xabar {len(users)} ta foydalanuvchiga yuborilmoqda..."
-        )
+            status = await message.answer(
+                f"⏳ Xabar {len(users)} ta foydalanuvchiga yuborilmoqda..."
+            )
 
-        for user_id in users:
-            try:
-                await bot.send_message(user_id, message.text)
-                sent += 1
-            except Exception:
-                failed += 1
+            for user_id in users:
+                try:
+                    await bot.send_message(user_id, message.text)
+                    sent += 1
+                except Exception:
+                    failed += 1
 
-            await asyncio.sleep(0.05)
+                await asyncio.sleep(0.05)
 
-        waiting_broadcast.discard(message.from_user.id)
+            waiting_broadcast.discard(message.from_user.id)
 
-        await status.edit_text(
-            "✅ Broadcast tugadi!\n\n"
-            f"📨 Yuborildi: {sent}\n"
-            f"❌ Yuborilmadi: {failed}"
-        )
-        return
+            await status.edit_text(
+                "✅ Broadcast tugadi!\n\n"
+                f"📨 Yuborildi: {sent}\n"
+                f"❌ Yuborilmadi: {failed}"
+            )
+            return
     url = message.text.strip()
     file_path = None
 
