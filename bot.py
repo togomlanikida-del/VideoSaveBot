@@ -224,9 +224,9 @@ async def admin_clean(callback: CallbackQuery):
                 f"📨 Yuborildi: {sent}\n"
                 f"❌ Yuborilmadi: {failed}"
             )
-            return
-    url = message.text.strip()
-    file_path = None
+                return
+        url = message.text.strip()
+        file_path = None
 
     if not any(x in url for x in ["youtube.com", "youtu.be", "tiktok.com", "instagram.com"]):
         await message.answer("❌ Instagram, TikTok yoki YouTube link yuboring")
