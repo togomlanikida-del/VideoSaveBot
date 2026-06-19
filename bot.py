@@ -288,6 +288,8 @@ async def admin_clean(callback: CallbackQuery):
 
 async def main():
     print("Bot ishga tushdi...")
+    bot_info = await bot.get_me()
+    print("RAILWAY BOT:", bot_info.username, flush=True)
     await dp.start_polling(bot)
 
 
