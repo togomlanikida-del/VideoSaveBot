@@ -217,16 +217,17 @@ async def admin_clean(callback: CallbackQuery):
 
                 await asyncio.sleep(0.05)
 
-            waiting_broadcast.discard(message.from_user.id)
+        waiting_broadcast.discard(message.from_user.id)
 
-            await status.edit_text(
-                "✅ Broadcast tugadi!\n\n"
-                f"📨 Yuborildi: {sent}\n"
-                f"❌ Yuborilmadi: {failed}"
-            )
-                return
-        url = message.text.strip()
-        file_path = None
+        await status.edit_text(
+            f"✅ Broadcast tugadi!\n\n"
+            f"📨 Yuborildi: {sent}\n"
+            f"❌ Yuborilmadi: {failed}"
+        )
+        return
+
+    url = message.text.strip()
+    file_path = None
 
     if not any(x in url for x in ["youtube.com", "youtu.be", "tiktok.com", "instagram.com"]):
         await message.answer("❌ Instagram, TikTok yoki YouTube link yuboring")
