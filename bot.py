@@ -188,12 +188,12 @@ async def admin_clean(callback: CallbackQuery):
     )
     await callback.answer()
 
-    @dp.message()
-    async def get_link(message: Message):
-        print("GET_LINK ISHLADI:", message.text, flush=True)
-        await message.answer("🔎 Link qabul qilindi")
+@dp.message()
+async def get_link(message: Message):
+    print("GET_LINK ISHLADI:", message.text, flush=True)
+    await message.answer("🔎 Link qabul qilindi")
 
-        if message.from_user.id in waiting_broadcast:
+    if message.from_user.id in waiting_broadcast:
             if message.text == "/cancel":
                 waiting_broadcast.discard(message.from_user.id)
                 await message.answer("❌ Broadcast bekor qilindi.")
@@ -227,16 +227,16 @@ async def admin_clean(callback: CallbackQuery):
         )
         return
 
-    url = message.text.strip()
-    file_path = None
+url = message.text.strip()
+file_path = None
 
     if not any(x in url for x in ["youtube.com", "youtu.be", "tiktok.com", "instagram.com"]):
         await message.answer("❌ Instagram, TikTok yoki YouTube link yuboring")
         return
 
-    status = await message.answer("⏳ Video yuklanmoqda...")
+status = await message.answer("⏳ Video yuklanmoqda...")
 
-    try:
+try:
         os.makedirs("downloads", exist_ok=True)
 
         ydl_opts = {
