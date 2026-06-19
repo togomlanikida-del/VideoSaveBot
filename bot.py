@@ -194,29 +194,29 @@ async def get_link(message: Message):
     await message.answer("🔎 Link qabul qilindi")
 
     if message.from_user.id in waiting_broadcast:
-            if message.text == "/cancel":
-                waiting_broadcast.discard(message.from_user.id)
-                await message.answer("❌ Broadcast bekor qilindi.")
-                return
+        if message.text == "/cancel":
+            waiting_broadcast.discard(message.from_user.id)
+            await message.answer("❌ Broadcast bekor qilindi.")
+            return
 
-            stats_data = load_stats()
-            users = stats_data.get("users", [])
+        stats_data = load_stats()
+        users = stats_data.get("users", [])
 
-            sent = 0
-            failed = 0
+        sent = 0
+        failed = 0
 
-            status = await message.answer(
-                f"⏳ Xabar {len(users)} ta foydalanuvchiga yuborilmoqda..."
-            )
+        status = await message.answer(
+            f"⏳ Xabar {len(users)} ta foydalanuvchiga yuborilmoqda..."
+        )
 
-            for user_id in users:
-                try:
-                    await bot.send_message(user_id, message.text)
-                    sent += 1
-                except Exception:
-                    failed += 1
+        for user_id in users:
+            try:
+                await bot.send_message(user_id, message.text)
+                sent += 1
+            except Exception:
+                failed += 1
 
-                await asyncio.sleep(0.05)
+            await asyncio.sleep(0.05)
 
         waiting_broadcast.discard(message.from_user.id)
 
@@ -226,6 +226,9 @@ async def get_link(message: Message):
             f"❌ Yuborilmadi: {failed}"
         )
         return
+
+    url = message.text.strip()
+    file_path = None
 
 url = message.text.strip()
 file_path = None
