@@ -290,6 +290,7 @@ async def main():
     print("Bot ishga tushdi...")
     bot_info = await bot.get_me()
     print("RAILWAY BOT:", bot_info.username, flush=True)
+    await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
 
