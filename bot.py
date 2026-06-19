@@ -292,6 +292,8 @@ async def main():
     bot_info = await bot.get_me()
     print("RAILWAY BOT:", bot_info.username, flush=True)
     await bot.delete_webhook(drop_pending_updates=True)
+    webhook_info = await bot.get_webhook_info()
+    print("WEBHOOK URL:", webhook_info.url, flush=True)
     await dp.start_polling(bot)
 
 
